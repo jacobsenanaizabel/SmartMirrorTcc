@@ -2,8 +2,9 @@
 <html ng-app="todoApp">
 
   <head>
-    <link rel="icon" type="image/png" href="/favicon.ico">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/bower_components/weather-icons/css/weather-icons.css"/>
+    <link rel="icon" type="image/png" href="/favicon.ico">
     <link rel="stylesheet" href="main.css">
   </head>
 
@@ -16,6 +17,19 @@
         </div >
       </div>
     </nav>
+
+    <div class="row">
+      <div class="col-md-4">
+        <!--<iframe id="forecast_embed"
+          type="text/html"
+          frameborder="0" height="245"
+          width="100%"
+          src="http://forecast.io/embed/#lat=42.3583&lon=-71.0603&name=DowntownBoston&units=si"></iframe>-->
+        <todays-weather location="Chicago, IL" custom-size="100" use-google-images="true"></todays-weather>
+        <weather-forecast location="London, UK" units="metric"></weather-forecast>
+
+      </div>
+    </div>
 
     <div class="row">
       <div class="col-md-4">
@@ -64,16 +78,23 @@
         </div>
       </div>
     </div>
+
+    <div id="wrap">
+      <div id="main" class="container clear-top">
+        <p>Your content here</p>
+      </div>
+    </div>
+    <footer class="footer"></footer>
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.2.1/annyang.min.js"></script>
     <script src="/bower_components/ngmap/build/scripts/ng-map.min.js"></script>
     <script src="http://maps.google.com/maps/api/js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/angular-weather-directive/dist/angular-weather-directive.min.js"></script>
     <script src="main.js"></script>
-    <div class="panel panel-default">
-      <div class="panel-footer">TCC Ana Izabel e Ramon Silva</div>
-    </div>
   </body>
-
 </html>

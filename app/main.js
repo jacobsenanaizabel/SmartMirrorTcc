@@ -1,7 +1,6 @@
 var app = angular.module('todoApp', [
-  'ngMap'
+  'ngMap', 'weatherModule', 'ngSanitize'
 ]);
-
 app.service('sharedProperties', function() {
   var todoText = {
     text: 'Petrópolis, RJ'
