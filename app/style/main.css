@@ -8,9 +8,6 @@ html, body {
   --background-color: black;
 }
 
-#wrap {
-  min-height: 100%;
-}
 
 #main {
   overflow:auto;

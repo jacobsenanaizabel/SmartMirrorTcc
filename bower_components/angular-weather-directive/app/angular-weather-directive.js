@@ -145,7 +145,7 @@ weatherModule.directive('weatherDisplay', function(){
   };
 });
 
-
+<!--VERIFICAR PARA INSERIR A IMG NO CODIGO-->
 weatherModule.directive('weatherIcon', function() {
     return {
         restrict: 'E', replace: true,

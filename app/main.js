@@ -16,28 +16,62 @@ app.service('sharedProperties', function() {
   };
 });
 
-//inicio
-app.controller('TimeController', function ($scope, $interval) {
 
-    $scope.init = $interval(function(){
+app.controller('ForecastController', function($scope, $http) {
+
+  $scope.data = null;
+  $scope.weatherDescription = null;
+  $scope.weatherIcon = null;
+  $scope.mainTemp = null;
+
+  var local = 'Itaguai,RJ';
+  var APPID = '44db6a862fba0b067b1930da0d769e98';
+  var LANG = 'pt';
+  var units = 'metric';
+  var url = 'http://api.openweathermap.org/data/2.5/weather?q=';
+
+  $http.get(url + local + '&APPID=' + APPID + '&lang=' + LANG + '&units=' + units).success(function(data) {
+    $scope.name = data.name;
+    $scope.test = data;
+    $scope.weatherDescription = data.weather[0].description;
+    $scope.weatherIcon = data.weather[0].icon;
+    $scope.mainTemp = data.main.temp;
+    $scope.maxTemp = data.main.temp_max;
+    $scope.minTemp = data.main.temp_min;
+
+
+    $scope.data = JSON.stringify(data);
+    //var weather = JSON.parse(data);
+    console.log('sucesso!' + $scope.data);
+  }).error(function(data) {
+    console.log('Erro :(');
+  });
+});
+
+//inicio
+app.controller('TimeController', function($scope, $interval) {
+
+  $scope.init = $interval(function() {
     var date = new Date();
 
-    $scope.dates = [{ "date1" : date }]
-     },100 )
+    $scope.dates = [{
+      "date1": date
+    }]
+  }, 100)
 
 });
 
-app.filter('datetime', function($filter)
-{
- return function(input)
- {
-  if(input == null){ return ""; }
+app.filter('datetime', function($filter) {
+  return function(input) {
+    if (input == null) {
+      return "";
+    }
 
-  var _date = $filter('date')(new Date(input),'MMM dd yyyy - HH:mm:ss');
+    var _date = $filter('date')(new Date(input), 'MMM dd yyyy - HH:mm:ss');
 
-  return _date.toUpperCase();
+    return _date.toUpperCase();
 
- };
+  };
 });
 //final
 app.controller('TodoListController', function($scope, $rootScope, sharedProperties) {
@@ -106,11 +140,11 @@ app.controller('GMapController', function(NgMap, $scope, sharedProperties) {
     $scope.todoText = sharedProperties.getProperty();
   };
 
-//testar com esse controller
+  //testar com esse controller
   if (annyang) {
     var commands = {
       'buscar mapa *val': function(val) {
-          $scope.todoText = sharedProperties.getProperty();
+        $scope.todoText = sharedProperties.getProperty();
       }
     };
   }
