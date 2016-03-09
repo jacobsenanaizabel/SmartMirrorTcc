@@ -16,6 +16,30 @@ app.service('sharedProperties', function() {
   };
 });
 
+//inicio
+app.controller('TimeController', function ($scope, $interval) {
+
+    $scope.init = $interval(function(){
+    var date = new Date();
+
+    $scope.dates = [{ "date1" : date }]
+     },100 )
+
+});
+
+app.filter('datetime', function($filter)
+{
+ return function(input)
+ {
+  if(input == null){ return ""; }
+
+  var _date = $filter('date')(new Date(input),'MMM dd yyyy - HH:mm:ss');
+
+  return _date.toUpperCase();
+
+ };
+});
+//final
 app.controller('TodoListController', function($scope, $rootScope, sharedProperties) {
   $scope.todos = [{
     text: 'learn angular',
