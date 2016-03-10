@@ -5,6 +5,7 @@
 html, body {
   height: 100%;
   --background-color: black;
+  font-family: 'Roboto Mono';
 }
 #main {
   overflow: auto;
@@ -20,7 +21,7 @@ html, body {
   padding-top: 20px;
 }
 .mainTemp {
-  font-size: 300%;
+  font-size: 250%;
   font-weight: lighter;
 }
 .mainDesc {
@@ -36,4 +37,9 @@ html, body {
 
 .hidden{
   display: none;
+}
+
+.backgroundTest{
+  background-color: black;
+  color: white;
 }
