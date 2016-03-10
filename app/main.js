@@ -19,26 +19,54 @@ app.service('sharedProperties', function() {
 
 app.controller('ForecastController', function($scope, $http) {
 
+  //Estudar essa forma de obter icones, funciona com o owm, podendo ser adaptado
+  //para outros tipos de imagens
+  var Wclear = "http://i.imgur.com/t0sFyu4.png";
+  var Wcloud = "http://i.imgur.com/o36rBPa.png";
+  var WpartCloud = "http://i.imgur.com/GyPR6cF.png";
+  var Wrain = "http://i.imgur.com/VR2FFYZ.png";
+
+  var getIcon = function getIcon(id) {
+    switch (id) // Determines weather icon according to weather code
+    {
+      case 500:
+        return Wrain;
+      case 800:
+        return Wclear;
+      case 801:
+      case 802:
+      case 803:
+        return WpartCloud;
+      case 804:
+        return Wcloud;
+      default:
+        return Wclear;
+    }
+  }
+
+
   $scope.data = null;
   $scope.weatherDescription = null;
   $scope.weatherIcon = null;
   $scope.mainTemp = null;
 
-  var local = 'Itaguai,RJ';
+  //var local = 'Itaguaí, RJ';
+  var local = 'Rio de janeiro, RJ'
   var APPID = '44db6a862fba0b067b1930da0d769e98';
   var LANG = 'pt';
   var units = 'metric';
   var url = 'http://api.openweathermap.org/data/2.5/weather?q=';
+  var urlIcon = 'http://openweathermap.org/img/w/'
 
   $http.get(url + local + '&APPID=' + APPID + '&lang=' + LANG + '&units=' + units).success(function(data) {
     $scope.name = data.name;
     $scope.test = data;
     $scope.weatherDescription = data.weather[0].description;
-    $scope.weatherIcon = data.weather[0].icon;
+    //$scope.weatherIcon = urlIcon + data.weather[0].icon + '.png';
+    $scope.weatherIcon = getIcon(data.weather[0].id);
     $scope.mainTemp = data.main.temp;
     $scope.maxTemp = data.main.temp_max;
     $scope.minTemp = data.main.temp_min;
-
 
     $scope.data = JSON.stringify(data);
     //var weather = JSON.parse(data);
