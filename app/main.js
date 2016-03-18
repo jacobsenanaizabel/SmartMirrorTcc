@@ -52,7 +52,7 @@ app.controller('ForecastController', function($scope, $http) {
 
   //var local = 'Itaguaí, RJ';
   var local = 'Rio de janeiro, RJ'
-  var APPID = '44db6a862fba0b067b1930da0d769e98';
+  var APPID = '5acb2ff2dd10a23b785fecc0d1ea19ab';
   var LANG = 'pt';
   var units = 'metric';
   var url = 'http://api.openweathermap.org/data/2.5/weather?q=';
@@ -64,7 +64,7 @@ app.controller('ForecastController', function($scope, $http) {
     $scope.weatherDescription = data.weather[0].description;
     //$scope.weatherIcon = urlIcon + data.weather[0].icon + '.png';
     $scope.weatherIcon = getIcon(data.weather[0].id);
-    $scope.mainTemp = data.main.temp;
+    $scope.mainTemp = data.main.temp.toString().slice(0,2);
     $scope.maxTemp = data.main.temp_max;
     $scope.minTemp = data.main.temp_min;
 
@@ -160,6 +160,15 @@ app.controller('TodoListController', function($scope, $rootScope, sharedProperti
   annyang.addCommands(commands);
   annyang.debug();
   annyang.start();
+});
+
+app.controller('QuoteController',function($scope, $http){
+
+  var message, author;
+  $http.get('https://af5vkyyms6.execute-api.us-east-1.amazonaws.com/dev/quote').success(function(data){
+    $scope.message = data.message;
+    $scope.author = data.author;
+  });
 });
 
 app.controller('GMapController', function(NgMap, $scope, sharedProperties) {

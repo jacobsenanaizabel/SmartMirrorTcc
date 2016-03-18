@@ -43,3 +43,8 @@ html, body {
   background-color: black;
   color: white;
 }
+
+.mainAuthor{
+  text-align: right;
+  font-weight: bold;
+}
